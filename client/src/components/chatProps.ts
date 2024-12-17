@@ -34,7 +34,8 @@ export type {
     DataMessage,
     MessageItem,
     Message,
-    StreamMessage
+    StreamMessage,
+    IChatServer
 }
 
 export interface IChatProps {

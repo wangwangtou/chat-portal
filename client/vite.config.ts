@@ -8,6 +8,18 @@ function resolve_path(dir) {
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [vue()],
+  server: {
+    proxy: {
+      '/api': {
+        target: 'https://dashscope.aliyuncs.com',
+        changeOrigin: true,
+      },
+      '/compatible-mode': {
+        target: 'https://dashscope.aliyuncs.com',
+        changeOrigin: true,
+      },
+    }
+  },
   resolve: {
     //别名，代码引入时方便引入
     alias: [

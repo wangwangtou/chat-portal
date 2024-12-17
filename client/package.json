@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@types/vue": "^2.0.0",
+    "axios": "^1.7.9",
     "bootstrap": "^5.3.3",
     "element-plus": "^2.8.8",
     "highlight.js": "^11.10.0",

@@ -55,9 +55,9 @@ const computedMessageList = computed<MessageList>(() =>
 
 const chatCompletion = async (userMessage: MessageWithRole, signal: AbortSignal) => {
   try {
+    currentMessages.value.push(userMessage);
     // signalRef.value = signal;
     const respMessage = await (completionsFunction || openAICompletionsFunction)(computedMessageList.value, { stream, abortSignal: signal })
-    currentMessages.value.push(userMessage);
     if (isStreamMessage(respMessage)) {
       const tempResult: MessageItem[] = [];
       const streamMessage = respMessage as StreamMessage;
@@ -100,7 +100,12 @@ const chatCompletion = async (userMessage: MessageWithRole, signal: AbortSignal)
   }
 }
 
-const messageSend = async () => {
+const messageSend = async (event: KeyboardEvent) => {
+  if (event.shiftKey) {
+    return;
+  }
+  event.preventDefault();
+  console.log(event);
   if (isTalking.value) {
     if (stream) {
         signalRef.value?.abort();
@@ -262,8 +267,7 @@ const scrollToBottom = () => {
         resize="none"
         v-model="userInput.input.content"
         placeholder="通过shift+回车换行"
-        @keyup.shift.enter.prevent
-        @keyup.enter.prevent="messageSend">
+        @keydown.enter="messageSend">
       </el-input>
       <div
         class="send-box"
@@ -380,6 +384,7 @@ const scrollToBottom = () => {
 
       .content {
         float: right;
+        text-align: left;
       }
     }
 

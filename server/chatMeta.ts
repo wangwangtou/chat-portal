@@ -19,8 +19,9 @@ export type MessageWithRole = {
 export type StreamMessage = () => Promise<{ message: MessageItem, stop: boolean, index: number}>;
 
 export type Options = {
-    stream: boolean;
+    stream?: boolean;
     abortSignal?: any;
+    model?: string;
 }
 
 export interface IChatServer {
