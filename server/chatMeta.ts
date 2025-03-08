@@ -1,7 +1,7 @@
 // 
 export type TextMessage = { type: 'text', content: string };
 export type ImageMessage = { type: 'image', image_url: string | null };
-export type DataMessage = { type: 'data', data: any };
+export type DataMessage = { type: 'data', title: string, data: any, detail?: string };
 
 export type MessageTypedItem = TextMessage | ImageMessage | DataMessage;
 export type MessageItem = string | MessageTypedItem;

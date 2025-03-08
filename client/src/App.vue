@@ -3,8 +3,10 @@ import Chat from './components/Chat.vue'
 import { dashscope as openAICompletions, CHAT_MODEL, CODER_MODEL } from './utils/openAICompletions'
 
 import ChatServer from '../../server/index'
+import PortalChatServer from '../../server/portal'
 
-const completionsFunction = ChatServer.completions;
+const completionsFunction = new PortalChatServer().completions;
+// const completionsFunction = ChatServer.completions;
 const chatCompletions: typeof openAICompletions = (messages, options) => openAICompletions(messages, { ...options, model: CHAT_MODEL });
 const coderCompletions: typeof openAICompletions = (messages, options) => openAICompletions(messages, { ...options, model: CODER_MODEL });
 

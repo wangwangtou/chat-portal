@@ -1,6 +1,10 @@
 import Markdown from "markdown-it";
 import highlight from "highlight.js";
 import hljs from 'highlight.js/lib/common';
+import { createMathjaxInstance, mathjax } from "./plugin-mathjax";
+const mathjaxInstance = createMathjaxInstance({
+  a11y: false,
+});
 
 const mdOptions: Markdown.Options = {
   linkify: true,
@@ -23,4 +27,6 @@ const mdOptions: Markdown.Options = {
   },
 };
 
+
 export const md = new Markdown(mdOptions);
+md.use(mathjax, mathjaxInstance);

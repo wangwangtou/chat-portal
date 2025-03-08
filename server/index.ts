@@ -17,16 +17,41 @@ class ChatServer implements IChatServer {
         const resultTemp: Message = [
 `Fine, thank u!
 # title
+\\[
+    a=2
+\\]
 
-- one
+$$a=3$$
+
+$$
+a=4
+$$
+
+- one 
 - two
+
+$$a=6$$
 
 \`\`\`javascript
 alert(1);
 \`\`\`
 `,
             { type: 'image', image_url: 'https://example.com/image.jpg' },
-            { type: 'data', data: { foo: 'bar' } },
+            { type: 'data', title: 'Test.docx', data: { type: 'Word', payload: {
+                main: [
+                  { value: 'Hello World', size: 10 },
+                  { value: '\n', size: 10 },
+                  { value: '1111111\n', size: 10 },
+                  {
+                    level: 'first',
+                    type: 'title',
+                    value: '',
+                    valueList: [
+                      { value: 'Hello World', size: 20 }
+                    ]
+                  }
+                ]
+              } } },
         ]
         let index = -1;
         let token = -1;

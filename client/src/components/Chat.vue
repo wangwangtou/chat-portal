@@ -6,7 +6,7 @@ import BgIcon from "../bgicons/bg-icon.vue";
 
 import { IChatProps, UserInputMessage, MessageList, isStreamMessage, MessageItem, StreamMessage, Message, TextMessage } from './chatProps'
 import { MessageWithRole } from "../../../server/chatMeta";
-import { fa } from "element-plus/es/locale/index.mjs";
+import DataItem from './DataItem.vue';
 
 
 const {
@@ -95,6 +95,7 @@ const chatCompletion = async (userMessage: MessageWithRole, signal: AbortSignal)
     }
   } catch (e: any) {
     if (e.name !== "AbortError") {
+      console.error(e);
       ElMessage.info("出现错误：" + e.message);
     }
   }
@@ -219,7 +220,7 @@ const scrollToBottom = () => {
                   <img v-if="item.image_url" :src="item.image_url"/>
                 </div>
                 <div v-else-if="item.type == 'data'" v-loading="item.data == null">
-                  data
+                  <DataItem :data="item.data" :title="item.title" :detail="item.detail"/>
                 </div>
               </template>
             </div>
@@ -237,7 +238,7 @@ const scrollToBottom = () => {
                   <img v-if="item.image_url" :src="item.image_url"/>
                 </div>
                 <div v-else-if="item.type == 'data'" v-loading="item.data == null">
-                  data
+                  <DataItem :data="item.data" :title="item.title" :detail="item.detail"/>
                 </div>
               </template>
             </div>
@@ -251,7 +252,7 @@ const scrollToBottom = () => {
                   <img v-if="item.image_url" :src="item.image_url"/>
                 </div>
                 <div v-else-if="item.type == 'data'" v-loading="item.data == null">
-                  data
+                  <DataItem :data="item.data" :title="item.title" :detail="item.detail"/>
                 </div>
               </template>
             </div>
@@ -420,12 +421,15 @@ const scrollToBottom = () => {
 html :deep(.content) {
 }
 .content {
+  :deep(mjx-container[display=true]) { display: block; }
+  // :deep(mjx-assistive-mml) { display:none; }
   :deep(.hljs) {
     padding: 8px 16px;
     margin: 0px 16px;
     border-radius: 4px;
     color: #383a42;
     background: #fafafa;
+
 
     .hljs-comment,
     .hljs-quote {

@@ -9,6 +9,13 @@ function resolve_path(dir) {
 export default defineConfig({
   plugins: [vue()],
   server: {
+    fs: {
+      allow: [
+        resolve_path('.'),
+        // search up for workspace root
+        resolve_path('../server/api'),
+      ],
+    },
     proxy: {
       '/api': {
         target: 'https://dashscope.aliyuncs.com',
