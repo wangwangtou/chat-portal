@@ -79,12 +79,12 @@ const ChatBlock: React.FC<ChatBlockProps> = ({ block, loading, isLastBlock, onCh
 
     return (
         <div key={`chat-block-${block.id}`}
-            className={`group w-full text-gray-800 dark:text-gray-100 border-b border-black/10 dark:border-gray-900/50
+            className={`chat-block chat-block-role-${block.role} group w-full text-gray-800 dark:text-gray-100 border-b border-black/10 dark:border-gray-900/50
             ${block.role === 'assistant' ? 'bg-gray-100 dark:bg-gray-900' : 'bg-white dark:bg-gray-850'}`}>
             <div
                 className="text-base p-2 flex lg:px-0 m-auto flex-col">
-                <div className="w-full flex">
-                    <div className="w-[30px] flex flex-col relative items-end mr-4">
+                <div className="chat-block-main w-full flex">
+                    <div className="chat-block-head w-[30px] flex flex-col relative items-end mr-4">
                         <div className="relative flex h-[30px] w-[30px] p-0 rounded-xs items-center justify-center">
                             {block.role === 'user' ? (
                                 <UserCircleIcon width={24} height={24} />
@@ -95,7 +95,7 @@ const ChatBlock: React.FC<ChatBlockProps> = ({ block, loading, isLastBlock, onCh
                             ) : null}
                         </div>
                     </div>
-                    <div className="relative flex w-[calc(100%-50px)] flex-col gap-1 md:gap-3 lg:w-full">
+                    <div className="chat-block-content relative flex w-[calc(100%-50px)] flex-col gap-1 md:gap-3 lg:w-full">
                         <div id={`message-block-${block.id}`} className="flex grow flex-col gap-3"
                             style={errorStyles}>
                             <div
@@ -129,7 +129,7 @@ const ChatBlock: React.FC<ChatBlockProps> = ({ block, loading, isLastBlock, onCh
                     </div>
                 </div>
                 {!(isLastBlock && loading) && (
-                    <div id={`action-block-${block.id}`} className="flex justify-start items-center ml-10">
+                    <div id={`action-block-${block.id}`} className="chat-block-buttons flex justify-start items-center ml-10">
                         <div className="copy-button">
                             <CopyButton mode={CopyButtonMode.Compact} text={toText(block.content)} />
                         </div>
@@ -143,18 +143,18 @@ const ChatBlock: React.FC<ChatBlockProps> = ({ block, loading, isLastBlock, onCh
                     isEdit ?
                     <>
                         <div className="regenerate-button text-gray-400 visible">
-                                    <button className="flex gap-2" onClick={handleEditSave}>
+                                    <button className="chat-action-button flex gap-2" onClick={handleEditSave}>
                                         <CheckIcon {...iconProps}/>
                                     </button>
                         </div>
                         <div className="regenerate-button text-gray-400 visible">
-                                    <button className="flex gap-2" onClick={handleEditCancel}>
+                                    <button className="chat-action-button flex gap-2" onClick={handleEditCancel}>
                                         <XMarkIcon {...iconProps}/>
                                     </button>
                         </div>
                     </> :
                     (onChange ? <div className="regenerate-button text-gray-400 visible">
-                        <button className="flex gap-2" onClick={handleEdit}>
+                        <button className="chat-action-button flex gap-2" onClick={handleEdit}>
                             <PencilSquareIcon {...iconProps}/>
                         </button> 
                     </div> : null)

@@ -20,7 +20,7 @@ const ChatMessageBlock: React.FC<ChatMessageBlockProps> = ({ reasoning_content, 
                 reasoning_content ? 
                     <div>
                         <div className="text-gray-500 text-sm">{t('reasoning')}</div>
-                        <MarkdownBlock className="border p-2 bg-gray-200" key='reasoning' markdown={reasoning_content} role={role} loading={!!reasoning} />
+                        <MarkdownBlock className="chat-block-content-reasoning border p-2 bg-gray-200" key='reasoning' markdown={reasoning_content} role={role} loading={!!reasoning} />
                     </div> : null
             }
             {

@@ -86,13 +86,13 @@ const Chat: React.FC<ChatProps> = ({
     };
 
     return (
-        <div id={'chat-container'} ref={chatDivRef} className="relative chat-container flex-1 overflow-auto" onScroll={handleScroll}>
-            <div id={'chat-container1'} className="relative chat-container1 flex flex-col items-center text-sm dark:bg-gray-900">
+        <div ref={chatDivRef} className="chat-container relative flex-1 overflow-auto" onScroll={handleScroll}>
+            <div className="chat-container-inner relative flex flex-col items-center text-sm dark:bg-gray-900">
                 <div
                     className={`flex w-full items-center justify-center gap-1 p-3 text-gray-500 dark:border-gray-900/50 dark:bg-gray-900 dark:text-gray-300 ${!(conversation === null) ? 'border-b border-black/10' : ''}`}>
-                    <div className="flex items-center flex-row gap-1">
+                    <div className="chat-top-option flex items-center flex-row gap-1">
                         <span style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                            {t('model')}
+                            {t('模型：')}
                             {conversation && (
                                 <span>
                                     <span style={{ marginLeft: '0.25em' }}>{conversation.model}</span>
@@ -112,7 +112,6 @@ const Chat: React.FC<ChatProps> = ({
                     block={{ role: Role.System, content: conversation?.systemPrompt || systemPrompt || '' }}
                     loading={false}
                     onChange={(text) => {
-                        debugger
                         onSystemPromptChange?.(text);
                     }}
                     isLastBlock={false} />

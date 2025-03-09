@@ -353,12 +353,12 @@ const MessageBox =
             return (
                 <div
                     style={{ position: "sticky" }}
-                    className="absolute bottom-0 left-0 w-full border-t md:border-t-0 dark:border-white/20 md:border-transparent md:dark:border-transparent bg-white dark:bg-gray-900 md:bg-transparent! pt-2">
+                    className="message-box absolute bottom-0 left-0 w-full border-t md:border-t-0 dark:border-white/20 md:border-transparent md:dark:border-transparent bg-white dark:bg-gray-900 md:bg-transparent! pt-2">
                     <form onSubmit={handleSubmit}
                         className="stretch mx-2 flex flex-row gap-3 last:mb-2 md:mx-4 md:last:mb-6 lg:mx-auto">
                         <div id="message-box-border"
                             style={{ borderRadius: "1rem" }}
-                            className="relative flex flex-col h-full flex-1 w-full py-2 grow md:py-3 bg-white dark:bg-gray-850
+                            className="message-box-border relative flex flex-col h-full flex-1 w-full py-2 grow md:py-3 bg-white dark:bg-gray-850
                  dark:text-white dark:bg-gray-850 border border-black/10 dark:border-gray-900/50
                  focus-within:border-black/30 dark:focus-within:border-gray-500/50"
                         >
@@ -370,7 +370,7 @@ const MessageBox =
                                 </div>
                             )}
                             {/* Container for Textarea and Buttons */}
-                            <div className="flex items-center w-full relative space-x-2">
+                            <div className="message-box-main flex items-center w-full relative space-x-2">
                                 {/* Attachment Button */}
                                 <div className="flex items-center justify-start">
                                     <button
@@ -392,8 +392,8 @@ const MessageBox =
                                     tabIndex={0}
                                     ref={textAreaRef}
                                     rows={1}
-                                    className="flex-auto m-0 resize-none border-0 bg-transparent px-2 py-2 focus:ring-0 focus-visible:ring-0 outline-hidden shadow-none dark:bg-transparent"
-                                    placeholder={t('send-a-message')}
+                                    className="message-box-text flex-auto m-0 resize-none border-0 bg-transparent px-2 py-2 focus:ring-0 focus-visible:ring-0 outline-hidden shadow-none dark:bg-transparent"
+                                    placeholder={t('发送消息…')}
                                     onKeyDown={checkForSpecialKey}
                                     onChange={handleTextChange}
                                     onPaste={handlePaste}
@@ -401,9 +401,9 @@ const MessageBox =
                                 ></textarea>
 
                                 {/* Cancel/Submit Button */}
-                                <div className="flex items-center justify-end">
+                                <div className="message-box-buttons flex items-center justify-end">
                                     {loading ? (
-                                        <Tooltip title={t('cancel-output')} side="top" sideOffset={0}>
+                                        <Tooltip title={t('停止输出')} side="top" sideOffset={0}>
                                             <button
                                                 onClick={(e) => handleCancel(e)}
                                                 className="p-1">
