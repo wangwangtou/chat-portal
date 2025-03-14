@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef, useState } from 'react';
+import React, { Ref, forwardRef, useContext, useEffect, useImperativeHandle, useRef, useState } from 'react';
 import ChatBlock from "./ChatBlock";
 import ModelSelect from "./ModelSelect";
 import { OpenAIModel, ChatMessage, Conversation, Role } from "../models";
@@ -14,19 +14,29 @@ interface ChatProps {
     model: string | null;
     systemPrompt?: string;
     onSystemPromptChange?: (value: string) => void;
+    onUserMessageChange?: (value: string, index: number) => void;
     onModelChange: (value: string | null) => void;
     conversation: Conversation | null;
     loading: boolean;
 }
 
-const Chat: React.FC<ChatProps> = ({
+export interface ChatRef {
+    get divEl(): HTMLDivElement | null
+}
+
+const Chat: React.ForwardRefExoticComponent<ChatProps> = forwardRef<ChatRef, ChatProps>(({
     chatBlocks, onChatScroll, allowAutoScroll, model, systemPrompt,
-    onSystemPromptChange, onModelChange, conversation, loading
-}) => {
+    onSystemPromptChange, onUserMessageChange, onModelChange, conversation, loading
+}, ref) => {
     const { t } = useTranslation();
     const [models, setModels] = useState<OpenAIModel[]>([]);
     const chatDivRef = useRef<HTMLDivElement>(null);
 
+    useImperativeHandle(ref, () => ({
+        get divEl() {
+            return chatDivRef.current;
+        }
+    }));
     useEffect(() => {
         ModelRepos.getModels()
             .then(models => {
@@ -119,6 +129,9 @@ const Chat: React.FC<ChatProps> = ({
                 {chatBlocks.map((block, index) => (
                     <ChatBlock key={`chat-block-${block.id}`}
                         block={block}
+                        onChange={block.role == Role.User && onUserMessageChange ? (text) => {
+                            onUserMessageChange?.(text, index);
+                        } : undefined}
                         loading={index === chatBlocks.length - 1 && loading}
                         isLastBlock={index === chatBlocks.length - 1} />
                 ))}
@@ -126,6 +139,6 @@ const Chat: React.FC<ChatProps> = ({
             </div>
         </div>
     );
-};
+});
 
 export default Chat;
