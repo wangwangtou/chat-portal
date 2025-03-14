@@ -127,7 +127,7 @@ const Chat: React.ForwardRefExoticComponent<ChatProps> = forwardRef<ChatRef, Cha
                     isLastBlock={false} />
                 )}
                 {chatBlocks.map((block, index) => (
-                    <ChatBlock key={`chat-block-${block.id}`}
+                    <ChatBlock key={`chat-block-${index}`}
                         block={block}
                         onChange={block.role == Role.User && onUserMessageChange ? (text) => {
                             onUserMessageChange?.(text, index);

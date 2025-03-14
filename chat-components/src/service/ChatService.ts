@@ -209,6 +209,7 @@ export class OpenAILikeChatService implements IChatService {
             response = await fetch(endpoint, {
                 method: "POST",
                 headers: headers,
+                signal: this.abortController.signal,
                 body: JSON.stringify(requestBody),
             });
         } catch (error) {

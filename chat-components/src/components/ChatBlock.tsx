@@ -78,7 +78,7 @@ const ChatBlock: React.FC<ChatBlockProps> = ({ block, loading, isLastBlock, onCh
     };
 
     return (
-        <div key={`chat-block-${block.id}`}
+        <div
             className={`chat-block chat-block-role-${block.role} group w-full text-gray-800 dark:text-gray-100 border-b border-black/10 dark:border-gray-900/50
             ${block.role === 'assistant' ? 'bg-gray-100 dark:bg-gray-900' : 'bg-white dark:bg-gray-850'}`}>
             <div
@@ -96,7 +96,7 @@ const ChatBlock: React.FC<ChatBlockProps> = ({ block, loading, isLastBlock, onCh
                         </div>
                     </div>
                     <div className="chat-block-content relative flex w-[calc(100%-50px)] flex-col gap-1 md:gap-3 lg:w-full">
-                        <div id={`message-block-${block.id}`} className="flex grow flex-col gap-3"
+                        <div className="flex grow flex-col gap-3"
                             style={errorStyles}>
                             <div
                                 className="min-h-[20px] flex flex-col items-start gap-4">
@@ -129,7 +129,7 @@ const ChatBlock: React.FC<ChatBlockProps> = ({ block, loading, isLastBlock, onCh
                     </div>
                 </div>
                 {!(isLastBlock && loading) && (
-                    <div id={`action-block-${block.id}`} className="chat-block-buttons flex justify-start items-center ml-10">
+                    <div className="chat-block-buttons flex justify-start items-center ml-10">
                         <div className="copy-button">
                             <CopyButton mode={CopyButtonMode.Compact} text={toText(block.content)} />
                         </div>

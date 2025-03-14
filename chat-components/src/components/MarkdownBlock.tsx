@@ -73,7 +73,7 @@ const MarkdownBlock: React.FC<MarkdownBlockProps> = ({markdown, role, loading, c
         <div className="overflow-y-auto">
           <SyntaxHighlighter
             language={language}
-            style={userSettings.theme === 'dark' ? coldarkDark : oneLight}
+            style={oneLight}
             customStyle={
             {
               margin: '0'
