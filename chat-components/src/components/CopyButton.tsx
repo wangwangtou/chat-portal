@@ -26,7 +26,7 @@ const CopyButton = ({ text, mode = CopyButtonMode.Normal, className = '' }: Copy
         if (isCopied) {
             timeoutId = setTimeout(() => {
                 setIsCopied(false);
-            }, 2000);
+            }, 2000) as any;
         }
 
         return () => {

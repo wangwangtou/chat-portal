@@ -20,23 +20,15 @@ interface ChatProps {
     loading: boolean;
 }
 
-export interface ChatRef {
-    get divEl(): HTMLDivElement | null
-}
 
-const Chat: React.ForwardRefExoticComponent<ChatProps> = forwardRef<ChatRef, ChatProps>(({
+const Chat: React.FC<ChatProps> = ({
     chatBlocks, onChatScroll, allowAutoScroll, model, systemPrompt,
     onSystemPromptChange, onUserMessageChange, onModelChange, conversation, loading
-}, ref) => {
+}) => {
     const { t } = useTranslation();
     const [models, setModels] = useState<OpenAIModel[]>([]);
     const chatDivRef = useRef<HTMLDivElement>(null);
 
-    useImperativeHandle(ref, () => ({
-        get divEl() {
-            return chatDivRef.current;
-        }
-    }));
     useEffect(() => {
         ModelRepos.getModels()
             .then(models => {
@@ -139,6 +131,6 @@ const Chat: React.ForwardRefExoticComponent<ChatProps> = forwardRef<ChatRef, Cha
             </div>
         </div>
     );
-});
+}
 
 export default Chat;
